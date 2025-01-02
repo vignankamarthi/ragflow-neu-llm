@@ -1,5 +1,6 @@
 services:
   es01:
+    platform: linux/amd64
     container_name: ragflow-es-01
     profiles:
       - elasticsearch
@@ -36,6 +37,7 @@ services:
     restart: on-failure
 
   infinity:
+    platform: linux/amd64
     container_name: ragflow-infinity
     profiles:
       - infinity
@@ -67,7 +69,7 @@ services:
 
 
   mysql:
-    # mysql:5.7 linux/arm64 image is unavailable.
+    platform: linux/amd64
     image: mysql:8.0.39
     container_name: ragflow-mysql
     env_file: .env
@@ -96,6 +98,7 @@ services:
     restart: on-failure
 
   minio:
+    platform: linux/amd64
     image: quay.io/minio/minio:RELEASE.2023-12-20T01-00-02Z
     container_name: ragflow-minio
     command: server --console-address ":9001" /data
@@ -114,6 +117,7 @@ services:
     restart: on-failure
 
   redis:
+    platform: linux/amd64
     image: valkey/valkey:8
     container_name: ragflow-redis
     command: redis-server --requirepass ${REDIS_PASSWORD} --maxmemory 128mb --maxmemory-policy allkeys-lru
